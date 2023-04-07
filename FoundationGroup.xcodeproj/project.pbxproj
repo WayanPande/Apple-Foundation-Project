@@ -16,6 +16,7 @@
 		531A6E4F29DF0C4700432970 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531A6E4E29DF0C4700432970 /* Color.swift */; };
 		531A6E5129DF12F800432970 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531A6E5029DF12F800432970 /* ExploreView.swift */; };
 		531A6E5329DF131200432970 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531A6E5229DF131200432970 /* FavoriteView.swift */; };
+		531A6E5529E0908100432970 /* MultipleSelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531A6E5429E0908100432970 /* MultipleSelectionRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		531A6E4E29DF0C4700432970 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		531A6E5029DF12F800432970 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		531A6E5229DF131200432970 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		531A6E5429E0908100432970 /* MultipleSelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleSelectionRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				531A6E4E29DF0C4700432970 /* Color.swift */,
 				531A6E5029DF12F800432970 /* ExploreView.swift */,
 				531A6E5229DF131200432970 /* FavoriteView.swift */,
+				531A6E5429E0908100432970 /* MultipleSelectionRow.swift */,
 			);
 			path = FoundationGroup;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				531A6E4F29DF0C4700432970 /* Color.swift in Sources */,
 				531A6E5129DF12F800432970 /* ExploreView.swift in Sources */,
 				531A6E3D29DF06E900432970 /* FoundationGroupApp.swift in Sources */,
+				531A6E5529E0908100432970 /* MultipleSelectionRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoundationGroup/Preview Content\"";
+				DEVELOPMENT_TEAM = X8K28R28JL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -315,6 +320,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoundationGroup/Preview Content\"";
+				DEVELOPMENT_TEAM = X8K28R28JL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
