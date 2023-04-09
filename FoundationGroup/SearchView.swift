@@ -14,6 +14,8 @@ struct SearchView: View {
     @State private var selection: [String] = []
     @State private var rasa: String?
     @State private var pillFilter: String?
+    @ObservedObject var datas = ReadData()
+    @State private var foodsData = ReadData()
     
     let jenis = [
         "Asin",
@@ -110,6 +112,7 @@ struct SearchView: View {
                             if pillFilter == i {
                                 Button(action: {
                                     pillFilter = nil
+                                    print(self.datas)
                                 }){
                                     Text(i)
                                         .fontWeight(.bold)
@@ -141,12 +144,14 @@ struct SearchView: View {
                     .padding()
                 }
                 ScrollView {
-                    VStack(spacing: 20){
-                        ForEach(0..<10) {i in
-                            FoodCardView()
+                    NavigationStack {
+                        VStack(spacing: 20){
+                            ForEach(foodsData.foods, id: \.id) {food in
+                                FoodCardView(data: food)
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             }
             .navigationTitle("Search")

@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Pizza",
+        "type": "Italian",
+        "price": 10.99,
+        "ingredients": ["dough", "tomato sauce", "cheese", "pepperoni"],
+        "image_url": "https://source.unsplash.com/random/300x200/?pizza",
+        "description": "A classic Italian dish consisting of dough, tomato sauce, cheese, and a variety of toppings, often including pepperoni."
+    },
+    {
+        "name": "Sushi",
+        "type": "Japanese",
+        "price": 18.99,
+        "ingredients": ["rice", "seaweed", "raw fish", "avocado"],
+        "image_url": "https://source.unsplash.com/random/300x200/?sushi",
+        "description": "A Japanese dish consisting of bite-sized pieces of raw fish and vegetables, served on top of seasoned rice and wrapped in seaweed."
+    },
+    {
+        "name": "Taco",
+        "type": "Mexican",
+        "price": 6.99,
+        "ingredients": ["tortilla", "ground beef", "lettuce", "cheese", "salsa"],
+        "image_url": "https://source.unsplash.com/random/300x200/?taco",
+        "description": "A Mexican dish consisting of a tortilla filled with a variety of ingredients, such as seasoned ground beef, lettuce, cheese, and salsa."
+    },
+    {
+        "name": "Pad Thai",
+        "type": "Thai",
+        "price": 12.99,
+        "ingredients": ["rice noodles", "shrimp", "peanuts", "bean sprouts", "scallions"],
+        "image_url": "https://source.unsplash.com/random/300x200/?rice",
+        "description": "A Thai dish consisting of stir-fried rice noodles with shrimp, peanuts, bean sprouts, and scallions, seasoned with a tangy sauce."
+    },
+    {
+        "name": "Burger",
+        "type": "American",
+        "price": 8.99,
+        "ingredients": ["bun", "beef patty", "lettuce", "tomato", "onion", "pickles"],
+        "image_url": "https://source.unsplash.com/random/300x200/?burger",
+        "description": "An American classic consisting of a grilled beef patty served on a bun with lettuce, tomato, onion, and pickles."
+    },
+    {
+        "name": "Croissant",
+        "type": "French",
+        "price": 2.99,
+        "ingredients": ["flour", "butter", "milk", "sugar", "salt", "yeast"],
+        "image_url": "https://source.unsplash.com/random/300x200/?croissant",
+        "description": "A French pastry made with layers of buttery, flaky dough, typically served as a breakfast item or snack."
+    },
+    {
+        "name": "Ramen",
+        "type": "Japanese",
+        "price": 14.99,
+        "ingredients": ["noodles", "pork belly", "soft boiled egg", "seaweed", "green onion"],
+        "image_url": "https://source.unsplash.com/random/300x200/?ramen",
+        "description": "A Japanese noodle soup consisting of wheat noodles in a meat or fish-based broth, often served with a variety of toppings such as"
+    }
+]
