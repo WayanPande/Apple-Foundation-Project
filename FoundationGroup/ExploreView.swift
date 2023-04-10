@@ -11,23 +11,55 @@ struct ExploreView: View {
     @State private var searchText = ""
     @State private var index = 0
     @State private var showQuestionnaire = false
-
+    @State private var showLocation = false
+    @State private var locationSearch = ""
+    @State private var selectedLocation: String?
+    let hour = Calendar.current.component(.hour, from: Date())
+    
+    func getFoodTime() -> String {
+        switch hour {
+        case 0...10:
+            return "breakfast 🥐"
+        case 11...17:
+            return "lunch 😎"
+        case 18...24:
+            return "dinner 🥳"
+        default:
+            return "eat"
+        }
+    }
+    
+    var locationData = ["Banda Aceh", "Langsa", "Lhokseumawe", "Sabang", "Subulussalam", "Binjai", "Gunungsitoli", "Medan", "Padang Sidempuan", "Pematangsiantar", "Sibolga", "Tanjung Balai", "Tebing Tinggi", "Lubuklinggau", "Pagar Alam", "Palembang", "Prabumulih", "Sekayu", "Bukittinggi", "Padang", "Padang Panjang", "Pariaman", "Payakumbuh", "Sawahlunto", "Solok", "Sungai Penuh", "Jambi", "Bandung", "Bekasi", "Bogor", "Cimahi", "Cirebon", "Depok", "Sukabumi", "Tasikmalaya", "Banjar", "Magelang", "Pekalongan", "Salatiga Semarang", "Surakarta", "Tegal", "Semarang", "Batu", "Blitar", "Kediri", "Mojokerto", "Malang", "Madiun", "Surabaya", "Probolinggo", "Pasuruan", "Kota Administrasi Jakarta Pusat", "Kota Administrasi Jakarta Barat", "Kota Administrasi Jakarta Timur", "Kota Administrasi Jakarta Utara", "Kota Administrasi Jakarta Selatan", "Yogyakarta", "Cilegon", "Serang", "Tangerang", "Tangerang Selatan"]
+    
+    //    @State var searchResults: [String]
+    
+    
+    var searchResults: [String]{
+        if locationSearch.isEmpty {
+            return locationData
+        } else {
+            return locationData.filter { $0.contains(locationSearch) }
+        }
+    }
+    
     
     var body: some View {
         NavigationStack {
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 VStack(spacing: 20){
                     
                     
                     ZStack(alignment: .trailing) {
                         RoundedRectangle(cornerRadius: 25)
                             .fill(.green)
-                            .frame(height: 200)
+                            .frame(height: 100)
                             .padding()
                         Button(action: {
                             showQuestionnaire.toggle()
                         }){
-                            Text("Questionnaire")
+                            Image(systemName: "pencil.line")
+                            Text("Isi")
+                                .fontWeight(.bold)
                         }
                         .padding()
                         .background()
@@ -42,7 +74,7 @@ struct ExploreView: View {
                     VStack(alignment: .leading){
                         HStack {
                             Text("You should try this for ") +
-                            Text("lunch")
+                            Text(getFoodTime())
                                 .fontWeight(.bold)
                         }
                         .padding(.horizontal)
@@ -71,18 +103,32 @@ struct ExploreView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
                     Button(action: {
-                        print("About tapped!")
+                        showLocation.toggle()
                     }) {
                         Image(systemName: "location.fill")
-                        Text("Location")
+                        Text(selectedLocation ?? "Location")
                     }
-                }
-                
-                ToolbarItem{
-                    Button(action: {
-                        print("Help tapped!")
-                    }) {
-                        Image(systemName: "person.circle.fill")
+                    .sheet(isPresented: $showLocation) {
+                        NavigationStack {
+                            SingleQuestionView(data: searchResults, selected: $selectedLocation)
+                                .navigationTitle("Location")
+                                .navigationBarTitleDisplayMode(.inline)
+                                .searchable(text: $locationSearch)
+                                .toolbar {
+                                    ToolbarItem(placement: .navigationBarLeading){
+                                        Button("Cancel", role: .cancel) {
+                                            showLocation.toggle()
+                                        }
+                                        .foregroundColor(.red)
+                                    }
+                                    ToolbarItem {
+                                        Button("Done") {
+                                            showLocation.toggle()
+                                        }
+                                    }
+                                }
+                                .padding()
+                        }
                     }
                 }
             }

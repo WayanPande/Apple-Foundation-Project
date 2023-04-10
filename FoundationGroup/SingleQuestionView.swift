@@ -14,19 +14,34 @@ struct SingleQuestionView: View {
     var title: String?
     
     var body: some View {
-        List {
-            Section (header: HStack{
-                Text(title ?? "")
-                    .padding(.vertical)
-                    .fontWeight(.bold)
-            }) {
-                ForEach(data, id: \.self) {i in
-                    MultipleSelectionRow(title: i, isSelected: selected == i) {
-                        selected = i
+        if let headerTitle = title {
+            return AnyView(
+                List {
+                    Section (header: HStack{
+                        Text(headerTitle)
+                            .padding(.vertical)
+                            .fontWeight(.bold)
+                    }) {
+                        ForEach(data, id: \.self) {i in
+                            MultipleSelectionRow(title: i, isSelected: selected == i) {
+                                selected = i
+                            }
+                        }
                     }
                 }
-            }
+                .cornerRadius(15)
+            )
+        }else {
+            return AnyView(
+                List {
+                    ForEach(data, id: \.self) {i in
+                        MultipleSelectionRow(title: i, isSelected: selected == i) {
+                            selected = i
+                        }
+                    }
+               }
+               .cornerRadius(15)
+            )
         }
-        .cornerRadius(15)
     }
 }
