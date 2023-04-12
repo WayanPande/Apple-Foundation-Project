@@ -7,7 +7,22 @@
 
 import SwiftUI
 
+
+class FoodCategory {
+    var title: String
+    var img: String
+    var id: UUID
+    
+    init(title: String, img: String){
+        self.title = title
+        self.img = img
+        self.id = UUID()
+    }
+}
+
 struct ExploreView: View {
+    
+    
     @State private var searchText = ""
     @State private var index = 0
     @State private var showQuestionnaire = false
@@ -31,7 +46,14 @@ struct ExploreView: View {
     
     var locationData = ["Banda Aceh", "Langsa", "Lhokseumawe", "Sabang", "Subulussalam", "Binjai", "Gunungsitoli", "Medan", "Padang Sidempuan", "Pematangsiantar", "Sibolga", "Tanjung Balai", "Tebing Tinggi", "Lubuklinggau", "Pagar Alam", "Palembang", "Prabumulih", "Sekayu", "Bukittinggi", "Padang", "Padang Panjang", "Pariaman", "Payakumbuh", "Sawahlunto", "Solok", "Sungai Penuh", "Jambi", "Bandung", "Bekasi", "Bogor", "Cimahi", "Cirebon", "Depok", "Sukabumi", "Tasikmalaya", "Banjar", "Magelang", "Pekalongan", "Salatiga Semarang", "Surakarta", "Tegal", "Semarang", "Batu", "Blitar", "Kediri", "Mojokerto", "Malang", "Madiun", "Surabaya", "Probolinggo", "Pasuruan", "Kota Administrasi Jakarta Pusat", "Kota Administrasi Jakarta Barat", "Kota Administrasi Jakarta Timur", "Kota Administrasi Jakarta Utara", "Kota Administrasi Jakarta Selatan", "Yogyakarta", "Cilegon", "Serang", "Tangerang", "Tangerang Selatan"]
     
-    //    @State var searchResults: [String]
+    var foodCategory: [FoodCategory] = [
+        FoodCategory(title: "Rice", img: "nasi"),
+        FoodCategory(title: "Drink", img: "minum"),
+        FoodCategory(title: "Chicken", img: "chicken"),
+        FoodCategory(title: "Fast Food", img: "fast-food"),
+        FoodCategory(title: "Noodle", img: "noodle"),
+        FoodCategory(title: "Seafood", img: "seafood")
+    ]
     
     
     var searchResults: [String]{
@@ -49,22 +71,41 @@ struct ExploreView: View {
                 VStack(spacing: 20){
                     
                     
-                    ZStack(alignment: .trailing) {
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(.green)
-                            .frame(height: 100)
-                            .padding()
+                    ZStack(alignment: .bottomTrailing) {
+                        Image("exploreBG")
+                            .resizable()
+                            .scaledToFit()
+                        
+                        Image("burger")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 120)
+                            .offset(x: -10, y: -10)
+                        
+                        Text("Let Us Help You To Choose Your Food")
+                            .offset(x: -50, y: -140)
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                            .font(.title2)
+                            .shadow(radius: 3)
+
                         Button(action: {
                             showQuestionnaire.toggle()
                         }){
-                            Image(systemName: "pencil.line")
-                            Text("Isi")
-                                .fontWeight(.bold)
+                            HStack{
+                                Image(systemName: "pencil.line")
+                                    .font(.system(size: 20))
+                                Text("Questionnaire")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+
+                            }
+                            .padding(.all, 5)
                         }
                         .padding()
                         .background()
                         .cornerRadius(10)
-                        .offset(x: -30)
+                        .offset(x: -20, y: -20)
                         .sheet(isPresented: $showQuestionnaire) {
                             QuestionnaireView(showQuestionnaire: $showQuestionnaire)
                         }
@@ -78,27 +119,68 @@ struct ExploreView: View {
                                 .fontWeight(.bold)
                         }
                         .padding(.horizontal)
-                        TabView(selection: $index) {
-                            ForEach((0..<3), id: \.self) { index in
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(.green)
-                                    .padding()
-                                    .frame(height: 200)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(foodCategory, id: \.id) { item in
+                                    ZStack(alignment: .topLeading) {
+                                            
+                                        Image("exploreBG")
+                                            .resizable()
+                                            .scaledToFit()
+                                        
+                                        Image(item.img)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(height: 120)
+                                            .offset(x: 120, y: 30)
+                                        
+                                        Text(item.title)
+                                            .foregroundColor(.white)
+                                            .shadow(radius: 3)
+                                            .offset(x: 20, y: 10)
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                    }
+                                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 10))
+
+                                }
                             }
                         }
-                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+
                     }
                     .frame(height: 200)
+                    .padding(.top)
                     
                     
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(.purple)
-                        .frame(height: 200)
-                        .padding()
+                    ZStack {
+                        Image("exploreBG")
+                            .resizable()
+                            .scaledToFit()
+                        
+                        HStack {
+                            
+                            Text("Most Popular Food")
+                                .frame(width: 150)
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                                .font(.system(size: 36))
+                                .shadow(radius: 3)
+                            
+                            Spacer()
+                            
+                            Image("chicken")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 250)
+                     
+                        }
+                        .padding(.horizontal)
+                        
+                    }
                     Spacer()
                 }
+                .padding()
             }
-            .padding()
             .navigationTitle("Explore")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
@@ -132,7 +214,6 @@ struct ExploreView: View {
                     }
                 }
             }
-            .searchable(text: $searchText)
         }
     }
 }
