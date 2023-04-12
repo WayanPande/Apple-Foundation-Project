@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    
+    @State private var searchQuery = ""
+    @State private var foodsData = ReadData()
+    
     var body: some View {
-        Text("Favorite")
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("\(foodsData.foods.count) Foods")
+                        .fontWeight(.bold)
+                    NavigationStack {
+                        VStack(spacing: 20){
+                            ForEach(foodsData.foods, id: \.id) {food in
+                                FoodCardView(data: food)
+                            }
+                        }
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle(Text("Favorite").foregroundColor(.green))
+            .searchable(text: $searchQuery)
+        }
     }
 }
 
