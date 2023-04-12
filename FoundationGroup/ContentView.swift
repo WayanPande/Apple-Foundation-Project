@@ -23,6 +23,7 @@ struct ContentView: View {
                     Label("Favorite", systemImage: "heart.fill")
                 }
         }
+        .accentColor(CustomColor.Primary)
     }
 }
 

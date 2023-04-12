@@ -26,17 +26,19 @@ struct SearchView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            List {
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack {
                         Button(action: {
                             showFilter.toggle()
                         },label: {
                             Image(systemName: "slider.horizontal.3")
+                                .font(.system(size: 14))
                             Text("Filter")
                                 .fontWeight(.bold)
+                                .font(.system(size: 13))
                         })
-                        .padding()
+                        .padding(.all, 10)
                         .background(CustomColor.Primary)
                         .foregroundColor(.white)
                         .clipShape(Capsule())
@@ -116,8 +118,9 @@ struct SearchView: View {
                                 }){
                                     Text(i)
                                         .fontWeight(.bold)
+                                        .font(.system(size: 10))
                                 }
-                                .padding()
+                                .padding(.all, 10)
                                 .background(CustomColor.Secondary)
                                 .foregroundColor(CustomColor.Primary)
                                 .clipShape(Capsule())
@@ -129,20 +132,24 @@ struct SearchView: View {
                                     .stroke(CustomColor.Primary, lineWidth: 1)
                                 }
                             }else {
-                                Button(i){
+                                Button(action: {
                                     pillFilter = i
+                                }){
+                                  Text(i)
+                                    .font(.system(size: 10))
                                 }
-                                .padding()
+                                .padding(.all, 10)
                                 .background(CustomColor.Secondary)
                                 .foregroundColor(CustomColor.Primary)
                                 .clipShape(Capsule())
-
+                                
                             }
                             
                         }
                     }
-                    .padding()
+                    .padding(.bottom, 3)
                 }
+                .listRowSeparator(.hidden)
                 ScrollView {
                     NavigationStack {
                         VStack(spacing: 20){
@@ -150,11 +157,12 @@ struct SearchView: View {
                                 FoodCardView(data: food)
                             }
                         }
-                        .padding()
                     }
                 }
+                .listRowSeparator(.hidden)
             }
             .navigationTitle("Search")
+            .listStyle(PlainListStyle())
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always)){
             HStack{

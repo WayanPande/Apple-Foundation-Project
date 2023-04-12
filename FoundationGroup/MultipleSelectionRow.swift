@@ -16,9 +16,10 @@ struct MultipleSelectionRow: View {
         Button(action: self.action) {
             HStack {
                 Text(self.title)
-                    .foregroundColor(.black)
+                    .foregroundColor(CustomColor.Primary)
                 Spacer()
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(CustomColor.Primary)
 
             }
         }

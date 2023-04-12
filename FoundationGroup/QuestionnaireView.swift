@@ -11,31 +11,45 @@ struct QuestionnaireView: View {
     
     @State private var questionAmount = 1.0
     @Binding public var showQuestionnaire: Bool
+    @Binding public var doneFillingQuestionnaire: Bool
     @State private var rasa: [String] = []
+    @State private var alergi: [String] = []
     @State private var umur: String?
     @State private var harga: String?
     @State private var tabSelection = 1
-    var totalQuestions = 3
+    var totalQuestions = 4
     
     let umurData = [
-        "0-5 tahun",
-        "6-15 tahun",
-        "16-25 tahun",
-        "25+ tahun"
+        "5-11 years old",
+        "12-25 years old",
+        "26-45 years old",
+        "46-65 years old",
+        "65+ years old"
     ]
     
     let hargaData = [
-        "< 10.000",
-        "10.000 <= 20.000"
+        "IDR 10k-20k",
+        "IDR 20k-30k",
+        "IDR 20k-40k",
+        "IDR 40k-50k",
+        "More than 50k"
     ]
     
     let rasaData = [
-        "Manis",
-        "Asin",
-        "Asam",
-        "Gurih",
-        "Pedas",
-        "Pahit"
+        "Sweet",
+        "Salty",
+        "Sour",
+        "Spicy",
+        "Bitter"
+    ]
+    
+    let alergiData = [
+        "Can't eat pork",
+        "Can't eat beef",
+        "Alcohol",
+        "Can't eat lamb",
+        "No one",
+        "Ikan"
     ]
     
     var body: some View {
@@ -46,13 +60,15 @@ struct QuestionnaireView: View {
                     .foregroundColor(.gray)
                 
                 TabView(selection: $tabSelection) {
-                    SingleQuestionView(data: umurData, selected: $umur, title: "Rentang umur?")
+                    SingleQuestionView(data: umurData, selected: $umur, title: "How Old Are You?")
                         .tag(1)
-                    MultipleQuestionView(data: rasaData, selected: $rasa, title: "Suka makanan seperti apa?")
+                    MultipleQuestionView(data: rasaData, selected: $rasa, title: "What Flavor Do You Like The Most?")
                         .tag(2)
-                    SingleQuestionView(data: hargaData, selected: $harga, title: "Rentang harga?")
+                    MultipleQuestionView(data: alergiData, selected: $rasa, title: "What Food Restrictions Do You Live?")
                         .tag(3)
-                    
+                    SingleQuestionView(data: hargaData, selected: $harga, title: "What is Your Price Range in Looking for Food?")
+                        .tag(4)
+
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 
@@ -101,15 +117,17 @@ struct QuestionnaireView: View {
                 ToolbarItem {
                     Button("Done") {
                         showQuestionnaire.toggle()
+                        doneFillingQuestionnaire = true
                     }
                 }
             }
         }
+        .accentColor(CustomColor.Primary)
     }
 }
 
 struct QuestionnaireView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionnaireView(showQuestionnaire: .constant(false))
+        QuestionnaireView(showQuestionnaire: .constant(false), doneFillingQuestionnaire: .constant(false))
     }
 }
