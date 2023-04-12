@@ -29,6 +29,7 @@ struct ExploreView: View {
     @State private var showLocation = false
     @State private var locationSearch = ""
     @State private var selectedLocation: String?
+    @State private var doneFillingQuestionnaire = false
     let hour = Calendar.current.component(.hour, from: Date())
     
     func getFoodTime() -> String {
@@ -70,11 +71,47 @@ struct ExploreView: View {
             ScrollView(showsIndicators: false){
                 VStack(spacing: 20){
                     
+                    if doneFillingQuestionnaire {
+                        VStack(alignment: .leading){
+                            Text("Recommendation for you")
+                                .fontWeight(.semibold)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(0..<5, id: \.self) {i in
+                                        VStack{
+                                            Image(i % 2 == 0 ? "crispy-chicken" : "fried-chicken")
+                                                .resizable()
+                                                .frame(width: 200)
+                                                .scaledToFit()
+                                            VStack(alignment: .leading) {
+                                                Text(i % 2 == 0 ? "Crispy Chicken" : "Fried Chicken")
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(CustomColor.Primary)
+                                                Text("Crispy chicken typically refers to chicken that has a crispy, crunchy exterior and a juicy, tender interior. It is often coated in a batter or breading, which is then fried or baked until crispy.")
+                                                    .foregroundColor(CustomColor.Primary)
+                                                    .font(.caption)
+                                                    .fontWeight(.light)
+                                                    .lineLimit(2)
+                                                    
+                                            }
+                                            .padding(.horizontal)
+                                            .padding(.top, 5)
+                                            .padding(.bottom, 10)
+                                        }
+                                        .frame(width: 200,height: 200)
+                                        .background(CustomColor.Secondary)
+                                        .cornerRadius(10)
+                                    }
+                                }
+                            }
+                        }
+                    }
                     
                     ZStack(alignment: .bottomTrailing) {
                         Image("exploreBG")
                             .resizable()
                             .scaledToFit()
+                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                         
                         Image("burger")
                             .resizable()
@@ -84,10 +121,9 @@ struct ExploreView: View {
                         
                         Text("Let Us Help You To Choose Your Food")
                             .offset(x: -50, y: -140)
-                            .foregroundColor(.white)
+                            .foregroundColor(CustomColor.Primary)
                             .fontWeight(.bold)
                             .font(.title2)
-                            .shadow(radius: 3)
 
                         Button(action: {
                             showQuestionnaire.toggle()
@@ -107,8 +143,9 @@ struct ExploreView: View {
                         .cornerRadius(10)
                         .offset(x: -20, y: -20)
                         .sheet(isPresented: $showQuestionnaire) {
-                            QuestionnaireView(showQuestionnaire: $showQuestionnaire)
+                            QuestionnaireView(showQuestionnaire: $showQuestionnaire, doneFillingQuestionnaire: $doneFillingQuestionnaire)
                         }
+                        .shadow(radius: 0.2)
                         
                     }
                     
@@ -117,6 +154,7 @@ struct ExploreView: View {
                             Text("You should try this for ") +
                             Text(getFoodTime())
                                 .fontWeight(.bold)
+                                .foregroundColor(CustomColor.Primary)
                         }
                         .padding(.horizontal)
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -135,8 +173,7 @@ struct ExploreView: View {
                                             .offset(x: 120, y: 30)
                                         
                                         Text(item.title)
-                                            .foregroundColor(.white)
-                                            .shadow(radius: 3)
+                                            .foregroundColor(CustomColor.Primary)
                                             .offset(x: 20, y: 10)
                                             .font(.title)
                                             .fontWeight(.bold)
@@ -161,10 +198,9 @@ struct ExploreView: View {
                             
                             Text("Most Popular Food")
                                 .frame(width: 150)
-                                .foregroundColor(.white)
+                                .foregroundColor(CustomColor.Primary)
                                 .fontWeight(.bold)
                                 .font(.system(size: 36))
-                                .shadow(radius: 3)
                             
                             Spacer()
                             
@@ -211,10 +247,12 @@ struct ExploreView: View {
                                 }
                                 .padding()
                         }
+                        .accentColor(CustomColor.Primary)
                     }
                 }
             }
         }
+        .accentColor(CustomColor.Primary)
     }
 }
 
