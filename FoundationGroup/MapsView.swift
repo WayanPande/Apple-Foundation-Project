@@ -24,9 +24,89 @@ struct MapsView: View {
             Map(coordinateRegion: $region,showsUserLocation: true, userTrackingMode: .constant(.follow),  annotationItems: annotations) {
                 MapMarker(coordinate: $0.coordinate)
             }
-//            .sheet(isPresented: .constant(true) ){
-//                Text("test")
-//            }
+            .sheet(isPresented: .constant(true) ){
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading){
+                        Text("Latest in the area")
+                            .font(.title)
+                            .padding(.vertical, 30)
+                        
+                        VStack(alignment: .leading){
+                            Text("Warung nearby")
+                                .fontWeight(.semibold)
+                                .padding(.vertical)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(0..<5, id: \.self) {i in
+                                        VStack{
+                                            Image(i % 2 == 0 ? "crispy-chicken" : "fried-chicken")
+                                                .resizable()
+                                                .frame(width: 200)
+                                                .scaledToFit()
+                                            VStack(alignment: .leading) {
+                                                Text(i % 2 == 0 ? "Crispy Chicken" : "Fried Chicken")
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(CustomColor.Primary)
+                                                Text("Crispy chicken typically refers to chicken that has a crispy, crunchy exterior and a juicy, tender interior. It is often coated in a batter or breading, which is then fried or baked until crispy.")
+                                                    .foregroundColor(CustomColor.Primary)
+                                                    .font(.caption)
+                                                    .fontWeight(.light)
+                                                    .lineLimit(2)
+                                                
+                                            }
+                                            .padding(.horizontal)
+                                            .padding(.top, 5)
+                                            .padding(.bottom, 10)
+                                        }
+                                        .frame(width: 200,height: 200)
+                                        .background(CustomColor.Secondary)
+                                        .cornerRadius(10)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        VStack(alignment: .leading){
+                            Text("Recommendation for you")
+                                .fontWeight(.semibold)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack {
+                                    ForEach(0..<5, id: \.self) {i in
+                                        VStack{
+                                            Image(i % 2 == 0 ? "crispy-chicken" : "fried-chicken")
+                                                .resizable()
+                                                .frame(width: 200)
+                                                .scaledToFit()
+                                            VStack(alignment: .leading) {
+                                                Text(i % 2 == 0 ? "Crispy Chicken" : "Fried Chicken")
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(CustomColor.Primary)
+                                                Text("Crispy chicken typically refers to chicken that has a crispy, crunchy exterior and a juicy, tender interior. It is often coated in a batter or breading, which is then fried or baked until crispy.")
+                                                    .foregroundColor(CustomColor.Primary)
+                                                    .font(.caption)
+                                                    .fontWeight(.light)
+                                                    .lineLimit(2)
+                                                
+                                            }
+                                            .padding(.horizontal)
+                                            .padding(.top, 5)
+                                            .padding(.bottom, 10)
+                                        }
+                                        .frame(width: 200,height: 200)
+                                        .background(CustomColor.Secondary)
+                                        .cornerRadius(10)
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                .padding()
+                .presentationDetents([.height(350), .medium, .large])
+                .presentationDragIndicator(.automatic)
+                
+            }
         }
         .ignoresSafeArea()
     }
