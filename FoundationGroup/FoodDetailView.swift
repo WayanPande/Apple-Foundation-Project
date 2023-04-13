@@ -28,9 +28,11 @@ struct FoodDetailView: View {
         Location(name: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667))
     ]
     
+    @StateObject var favoriteData = Favorite()
+    
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
                     AsyncImage(url: URL(string: data.imageURL)!) { image in
                         image
@@ -53,6 +55,7 @@ struct FoodDetailView: View {
                         Spacer()
                         Button(action: {
                             liked.toggle()
+                            favoriteData.favoriteFoods?.append(data)
                         }){
                             Image(systemName: !liked ? "heart" :  "heart.fill")
                                 .padding(.all, 7)
@@ -81,7 +84,7 @@ struct FoodDetailView: View {
                     VStack(alignment: .leading, spacing: 5) {
                         ForEach(data.ingredients, id: \.self) { item in
                             HStack{
-                                Image(systemName: "circle")
+                                Image(systemName: "circle.fill")
                                 Text(item)
                                     .font(.subheadline)
                             }
@@ -106,15 +109,15 @@ struct FoodDetailView: View {
                     .padding()
                     
                 }
-                .padding(.bottom)
+//                .padding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
             }
-            .ignoresSafeArea()
         }
+        .environmentObject(favoriteData)
     }
 }
 
 struct FoodDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodDetailView(data: Food(name: "Nasi Padang", type: "Nasi", price: 2000, ingredients: ["flour", "butter", "milk", "sugar", "salt", "yeast"], imageURL: "https://source.unsplash.com/random/800x600/?ramen", description: "A French pastry made with layers of buttery, flaky dough, typically served as a breakfast item or snack."))
+        FoodDetailView(data: Food(name: "Nasi Padang", type: "Nasi", price: 2000, ingredients: ["flour", "butter", "milk", "sugar", "salt", "yeast"], imageURL: "https://source.unsplash.com/random/800x600/?ramen", description: "A French pastry made with layers of buttery, flaky dough, typically served as a breakfast item or snack.", halal: true))
     }
 }

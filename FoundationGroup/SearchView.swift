@@ -15,14 +15,24 @@ struct SearchView: View {
     @State private var rasa: String?
     @State private var pillFilter: String?
     @ObservedObject var datas = ReadData()
-    @State private var foodsData = ReadData()
+    @State private var foodsData = ReadData().foods
     
     let jenis = [
-        "Asin",
-        "Manis",
-        "Asam",
-        "Gurih"
+        "Rice",
+        "Drinks",
+        "Chicken",
+        "Fast Food",
+        "Noodle",
+        "Seafood",
     ]
+    
+    var searchResults: [Food]{
+        if searchText.isEmpty {
+            return foodsData
+        } else {
+            return foodsData.filter { $0.name.contains(searchText) }
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -153,7 +163,7 @@ struct SearchView: View {
                 ScrollView {
                     NavigationStack {
                         VStack(spacing: 20){
-                            ForEach(foodsData.foods, id: \.id) {food in
+                            ForEach(searchResults, id: \.id) {food in
                                 FoodCardView(data: food)
                             }
                         }
@@ -164,35 +174,7 @@ struct SearchView: View {
             .navigationTitle("Search")
             .listStyle(PlainListStyle())
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always)){
-            HStack{
-                Image(systemName: "globe")
-                    .padding(.all, 5)
-                    .background(.red)
-                    .foregroundColor(.white)
-                    .clipShape(Circle())
-                
-                Text("Gas Station")
-            }
-            HStack{
-                Image(systemName: "magnifyingglass")
-                    .padding(.all, 5)
-                    .background(.green)
-                    .foregroundColor(.white)
-                    .clipShape(Circle())
-                
-                Text("Gas Station")
-            }
-            HStack{
-                Image(systemName: "heart.fill")
-                    .padding(.all, 5)
-                    .background(.blue )
-                    .foregroundColor(.white)
-                    .clipShape(Circle())
-                
-                Text("Gas Station")
-            }
-        }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
     }
 }
 

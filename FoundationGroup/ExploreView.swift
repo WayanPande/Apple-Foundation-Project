@@ -120,6 +120,7 @@ struct ExploreView: View {
                             .offset(x: -10, y: -10)
                         
                         Text("Let Us Help You To Choose Your Food")
+                            .multilineTextAlignment(.trailing)
                             .offset(x: -50, y: -140)
                             .foregroundColor(CustomColor.Primary)
                             .fontWeight(.bold)

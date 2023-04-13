@@ -15,11 +15,12 @@ struct Food: Codable {
     let imageURL: String
     let description: String
     let id = UUID()
+    let halal: Bool
     
     enum CodingKeys: String, CodingKey {
         case name, type, price, ingredients
         case imageURL = "image_url"
-        case description
+        case description, halal
     }
 }
 
