@@ -67,7 +67,7 @@ struct FoodDetailView: View {
                     .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
                     
                     Text(data.name)
-                        .padding(EdgeInsets(top: 15, leading: 15, bottom: 5, trailing: 15))
+                        .padding(EdgeInsets(top: 0, leading: 15, bottom: 5, trailing: 15))
                         .font(.title)
                         .fontWeight(.bold)
                     
@@ -76,7 +76,7 @@ struct FoodDetailView: View {
                         .font(.subheadline)
                     
                     Text("Ingredients")
-                        .padding(EdgeInsets(top: 25, leading: 15, bottom: 0, trailing: 0))
+                        .padding(EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 0))
                         .fontWeight(.semibold)
                         .foregroundColor(.gray)
                     
@@ -97,19 +97,19 @@ struct FoodDetailView: View {
                         .padding(EdgeInsets(top: 25, leading: 15, bottom: 0, trailing: 0))
                         .fontWeight(.semibold)
                         .foregroundColor(.gray)
-                    HStack{
-                        Spacer()
-                        Map(coordinateRegion: $region,showsUserLocation: true, userTrackingMode: .constant(.follow),  annotationItems: annotations) {
-                            MapMarker(coordinate: $0.coordinate)
+                    NavigationView {
+                        NavigationLink(destination: MapsView()){
+                            Map(coordinateRegion: $region,showsUserLocation: true, userTrackingMode: .constant(.follow),  annotationItems: annotations) {
+                                MapMarker(coordinate: $0.coordinate)
+                            }
+                            .frame(height: 300)
+                            .cornerRadius(10)
+                            .toolbar(.hidden, for: .tabBar)
                         }
-                        .frame(height: 300)
-                        .cornerRadius(10)
-                        Spacer()
+                        .padding()
                     }
-                    .padding()
-                    
                 }
-//                .padding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
+                //                .padding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
             }
         }
         .environmentObject(favoriteData)

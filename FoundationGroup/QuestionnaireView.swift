@@ -44,12 +44,18 @@ struct QuestionnaireView: View {
     ]
     
     let alergiData = [
-        "Can't eat pork",
-        "Can't eat beef",
+        "Pork",
+        "Beef",
         "Alcohol",
-        "Can't eat lamb",
-        "No one",
-        "Ikan"
+        "Seafood",
+        "High Sugar",
+        "High Carbo",
+        "High Sodium",
+        "Spicy",
+        "Contain Milk",
+        "Contain Egg",
+        "Contain Gluten",
+        "Contain Nuts"
     ]
     
     var body: some View {
